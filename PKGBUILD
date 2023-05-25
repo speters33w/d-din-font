@@ -54,15 +54,15 @@ install_fonts(){
 
 install_webfonts(){
   if [ "$_include_webfonts" = true ] ; then
-	mkdir -p "$pkgdir"/"$_webfontdir"
-	if [ ! -f "$_webfontdir/D-DIN.woff" ] ; then 
-      install -Dm644 -t "$pkgdir"/"$_webfontdir"/ ./*.woff
-	fi
+  mkdir -p "$pkgdir"/"$_webfontdir"
+  if [ ! -f "$_webfontdir/D-DIN.woff" ] ; then 
+    install -Dm644 -t "$pkgdir"/"$_webfontdir"/ ./*.woff
+  fi
     if [ ! -f "$_webfontdir/D-DIN.woff2" ] ; then
       install -Dm644 -t "$pkgdir"/"$_webfontdir"/ ./*.woff2 
     fi
-	echo -e "\e[32mWebfonts will be installed in ${_webfontdir}.\e[0m" 
-  fi	
+  echo -e "\e[32mWebfonts will be installed in ${_webfontdir}.\e[0m" 
+  fi  
 }
 
 package_ttf-d-din() {
