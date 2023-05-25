@@ -3,13 +3,14 @@
 
 _include_webfonts=false
 # true to include webfonts with ttf or otf installation.
+# explicitly installing webfonts overrides this value to true.
 
-_webfontdir=/www/fonts/
+_webfontdir=$HOME/www/fonts/
 # Directory to copy webfonts to.
 
 fontname=d-din
-pkgname=("otf-$fontname" "ttf-$fontname" "webfonts-$fontname")
-# pkgname=("otf-$fontname")  # For testing single package
+# pkgname=("otf-$fontname" "ttf-$fontname" "webfonts-$fontname")
+pkgname=("webfonts-$fontname")  # Install single package.
 pkgver=1.12
 pkgrel=1.12
 name="$fontname-fonts" # Fedora package name
@@ -20,7 +21,7 @@ pkgdesc="A sans-serif typeface family derived from German DIN by Charles Nix."
 # url=https://www.datto.com/fonts/d-din/  # Datto no longer hosts file.
 url=https://packages.fedoraproject.org/pkgs/d-din-fonts/
 arch=(any)
-license=(OFL)
+license=("custom:SIL Open Font License v1.1")
 depends=()
 makedepends=()
 optdepends=()
@@ -53,14 +54,14 @@ install_fonts(){
 
 install_webfonts(){
   if [ "$_include_webfonts" = true ] ; then
-    mkdir -p "$pkgdir"/"$_webfontdir"/
-    if [ ! -f "$_webfontdir/D-DIN.woff" ] ; then 
+	mkdir -p "$pkgdir"/"$_webfontdir"
+	if [ ! -f "$_webfontdir/D-DIN.woff" ] ; then 
       install -Dm644 -t "$pkgdir"/"$_webfontdir"/ ./*.woff
 	fi
     if [ ! -f "$_webfontdir/D-DIN.woff2" ] ; then
       install -Dm644 -t "$pkgdir"/"$_webfontdir"/ ./*.woff2 
     fi
-	echo -e "\e[32mWebfonts will be installed in ${_webfontdir}.\e[0m"
+	echo -e "\e[32mWebfonts will be installed in ${_webfontdir}.\e[0m" 
   fi	
 }
 
@@ -83,4 +84,5 @@ package_webfonts-d-din() {
   install_license
   install_webfonts
 }
+
 
